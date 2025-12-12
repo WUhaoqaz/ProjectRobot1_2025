@@ -110,7 +110,8 @@ while True:
                 max_score = max(scores)
                 index = scores.index(max_score)
                 if max_score > THRESHOLD:
-                    img.draw_string(0, 195, "persion:%d,score:%2.1f" % (index, max_score), color=(0, 255, 0), scale=2)
+                    person_id = index % 10
+                    img.draw_string(0, 195, "persion:%d,score:%2.1f" % (person_id, max_score), color=(0, 255, 0), scale=2)
                     recog_flag = True
                 else:
                     img.draw_string(0, 195, "unregistered,score:%2.1f" % (max_score), color=(255, 0, 0), scale=2)
@@ -126,9 +127,10 @@ while True:
             if recog_flag:
                 img.draw_rectangle(l[0], l[1], l[2], l[3], color=(0, 255, 0))
                 recog_flag = False
-                if index < 10:
-                    index = "%02d" % index
-                msg_ = "%s%s" % ("Y", str(index))
+                person_id = index % 10
+                if person_id < 10:
+                    person_id = "%02d" % person_id
+                msg_ = "%s%s" % ("Y", str(person_id))
             else:
                 img.draw_rectangle(l[0], l[1], l[2], l[3], color=(255, 255, 255))
                 msg_ = "N"
